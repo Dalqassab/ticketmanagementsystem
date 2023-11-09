@@ -1,0 +1,64 @@
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+/* Navigation styles */
+.navbar[b-oe5eeamzxi] {
+    margin-bottom: 1rem;
+    background-color: #ffffff;
+}
+
+.navbar-brand[b-oe5eeamzxi] {
+    font-weight: bold;
+    color: #0056b3 !important;
+}
+
+.nav-link[b-oe5eeamzxi] {
+    color: #0056b3 !important;
+}
+
+.navbar-toggler[b-oe5eeamzxi] {
+    border-color: #0056b3;
+}
+
+.navbar-toggler-icon[b-oe5eeamzxi] {
+    background-image: url("data:image/svg+xml, ..."); /* Bootstrap default SVG for the navbar-toggler, change color as needed */
+}
+
+.nav-item .dropdown-menu[b-oe5eeamzxi] {
+    border-radius: 0;
+    border-color: #0056b3;
+}
+
+.dropdown-item[b-oe5eeamzxi] {
+    color: #0056b3;
+}
+
+    .dropdown-item:hover[b-oe5eeamzxi] {
+        background-color: #e9ecef;
+    }
+
+/* Ensure the dropdown menu text is not too close to the edges */
+.dropdown-menu > li > a[b-oe5eeamzxi] {
+    margin: 5px 15px;
+}
+
+/* Style for the active page */
+.navbar-nav .nav-link.active[b-oe5eeamzxi],
+.navbar-nav .show > .nav-link[b-oe5eeamzxi] {
+    color: #ffffff !important;
+    background-color: #0056b3 !important;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 991.98px) {
+    .navbar-nav .dropdown-menu[b-oe5eeamzxi] {
+        position: static;
+        float: none;
+    }
+}
+
+/* Adjust the login partial to align with the nav items */
+#_LoginPartial[b-oe5eeamzxi] {
+    display: flex;
+    align-items: center;
+}

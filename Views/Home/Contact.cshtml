@@ -1,0 +1,107 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .contact-section {
+            padding: 40px 0;
+        }
+
+        .contact-info {
+            margin-bottom: 40px;
+        }
+
+            .contact-info h3 {
+                font-size: 22px;
+                margin-bottom: 20px;
+                font-weight: bold;
+            }
+
+            .contact-info p {
+                line-height: 1.6;
+            }
+
+            .contact-info .icon {
+                margin-right: 10px;
+                color: #007BFF;
+                font-size: 18px;
+            }
+
+        .contact-form {
+            background-color: #f7f7f7;
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+            .contact-form h3 {
+                font-size: 22px;
+                margin-bottom: 20px;
+                font-weight: bold;
+            }
+
+            .contact-form .form-group {
+                margin-bottom: 15px;
+            }
+
+            .contact-form .form-control {
+                border-radius: 0;
+                border: 1px solid #ddd;
+                box-shadow: none;
+            }
+
+            .contact-form .btn-primary {
+                background-color: #007BFF;
+                border-color: #007BFF;
+                padding: 10px 20px;
+                border-radius: 0;
+            }
+    </style>
+
+    <section class="contact-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 contact-info">
+                    <h3>Contact Information</h3>
+                    <p><span class="icon">&#x1F4CD;</span>123 Help Desk Avenue, Tech City</p>
+                    <p><span class="icon">&#x2709;</span>support@example.com</p>
+                    <p><span class="icon">&#x260E;</span>+1 234 567 8900</p>
+                </div>
+                <div class="col-md-6 contact-form">
+                    <h3>Send Us a Message</h3>
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <h3>Find Us On The Map</h3>
+                    <!-- Placeholder for a map -->
+                    <div style="height: 300px; background-color: #ddd;">
+                        <!-- In a live site, this would be replaced with an actual map. -->
+                        <p style="padding-top: 135px; text-align: center;">Interactive Map Placeholder</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.9.9/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
