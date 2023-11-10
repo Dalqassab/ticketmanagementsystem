@@ -15,9 +15,10 @@ namespace TicketManagementSystem.Models
         [Required, MaxLength(2000)]
         public string? Description { get; set; }
 
-        
+        [Display(Name = "Date Created")]
         public DateTime DateCreated { get; set; } = DateTime.UtcNow;
 
+        [Display(Name = "Date Updated")]
         public DateTime? DateUpdated { get; set; } = DateTime.UtcNow;
 
         public enum PriorityLevel { Low, Medium, High }

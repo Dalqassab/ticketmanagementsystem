@@ -1,12 +1,20 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TicketManagementSystem.Models
 {
     public class Message
     {
-        public int Id { get; set; } 
-        public string Title { get; set; }
+        [Key]
+        [Required]
+        public int Id { get; set; }
+        [Required]
+        public string Subject { get; set; }
+       
+        [Required, MaxLength(2000)]
+        [Display(Name = "Message")]
         public string Body { get; set; }
+        [Required]
         public DateTime timestampsend { get; set; } = DateTime.UtcNow;
 
         [ForeignKey("Application")]
@@ -14,13 +22,10 @@ namespace TicketManagementSystem.Models
         public ApplicationUser sender { get; set; }
 
         [ForeignKey("Technician")]
-        public string? TechnicianId { get; set; }
+        public string? receiverID { get; set; }
         public ApplicationUser receiver { get; set; }
 
-        [ForeignKey("Ticket")]
-        public string? TicketId { get; set; }
-        public Ticket ticket { get; set; }
-        
+             
 
     }
 }

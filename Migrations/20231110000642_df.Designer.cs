@@ -9,11 +9,11 @@ using TicketManagementSystem.Data;
 
 #nullable disable
 
-namespace TicketManagementSystem.Data.Migrations
+namespace TicketManagementSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231108192126_mig4")]
-    partial class mig4
+    [Migration("20231110000642_df")]
+    partial class df
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -171,16 +171,11 @@ namespace TicketManagementSystem.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -206,6 +201,10 @@ namespace TicketManagementSystem.Data.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<string>("Message")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -222,6 +221,9 @@ namespace TicketManagementSystem.Data.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -244,10 +246,6 @@ namespace TicketManagementSystem.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("ApplicationUser");
-
-                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("TicketManagementSystem.Models.Category", b =>
@@ -293,6 +291,58 @@ namespace TicketManagementSystem.Data.Migrations
                     b.HasIndex("TicketCategoryID");
 
                     b.ToTable("KnowledgeBaseArticle");
+                });
+
+            modelBuilder.Entity("TicketManagementSystem.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("receiverID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("senderId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("timestampsend")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("receiverID");
+
+                    b.HasIndex("senderId");
+
+                    b.ToTable("Message");
+                });
+
+            modelBuilder.Entity("TicketManagementSystem.Models.Technician", b =>
+                {
+                    b.Property<string>("TechnicianId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("areaofexpertise")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("yearsofexperience")
+                        .HasColumnType("int");
+
+                    b.HasKey("TechnicianId");
+
+                    b.ToTable("Technician");
                 });
 
             modelBuilder.Entity("TicketManagementSystem.Models.Ticket", b =>
@@ -344,20 +394,6 @@ namespace TicketManagementSystem.Data.Migrations
                     b.HasIndex("TicketCategoryID");
 
                     b.ToTable("Ticket");
-                });
-
-            modelBuilder.Entity("TicketManagementSystem.Models.Technician", b =>
-                {
-                    b.HasBaseType("TicketManagementSystem.Models.ApplicationUser");
-
-                    b.Property<string>("areaofexpertise")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("yearsofexperience")
-                        .HasColumnType("int");
-
-                    b.HasDiscriminator().HasValue("Technician");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -422,10 +458,25 @@ namespace TicketManagementSystem.Data.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("TicketManagementSystem.Models.Message", b =>
+                {
+                    b.HasOne("TicketManagementSystem.Models.ApplicationUser", "receiver")
+                        .WithMany()
+                        .HasForeignKey("receiverID");
+
+                    b.HasOne("TicketManagementSystem.Models.ApplicationUser", "sender")
+                        .WithMany()
+                        .HasForeignKey("senderId");
+
+                    b.Navigation("receiver");
+
+                    b.Navigation("sender");
+                });
+
             modelBuilder.Entity("TicketManagementSystem.Models.Ticket", b =>
                 {
                     b.HasOne("TicketManagementSystem.Models.ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("SubmittedTickets")
                         .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -443,6 +494,11 @@ namespace TicketManagementSystem.Data.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("TicketManagementSystem.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("SubmittedTickets");
                 });
 
             modelBuilder.Entity("TicketManagementSystem.Models.Category", b =>

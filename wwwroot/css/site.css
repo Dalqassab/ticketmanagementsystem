@@ -8,8 +8,7 @@ body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     margin: 0;
-    padding: 0;
-    color: #ffdab9;
+    padding: 0;    
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -109,21 +108,6 @@ header {
 }
 
 
-.navbar {
-    background-color: #ffd800; /* subtle light grey background */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* subtle shadow to give depth */
-}
-
-.nav-link {
-    padding: 10px 15px; /* increase padding */
-    transition: background-color 0.2s; /* transition for smooth color change */
-}
-
-    .nav-link:hover {
-        background-color: lightgray; /* subtle hover effect */
-    }
-
-
 .center-form {
     display: flex;
     justify-content: center;
@@ -149,113 +133,64 @@ header {
         text-decoration: none;
         color: #0056b3;
     }
-
-
-
-h1 {
-    color: #333;
+/* Navigation styles */
+.navbar {
+    margin-bottom: 1rem;
+    background-color:lightblue;
 }
 
-.table {
-    width: 100%;
-    margin-bottom: 20px;
-    border-collapse: collapse;
+.navbar-brand {
+    font-weight: bold;
+    color: #0056b3 !important;
 }
 
-    .table th, .table td {
-        padding: 8px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .table th {
-        background-color: #ffdab9;
-        color: white;
-    }
-
-    .table tr:hover {
-        background-color: #f5f5f5;
-    }
-
-a {
-    color: #007bff;
-    text-decoration: none;
+.nav-link {
+    color: #0056b3 !important;
 }
 
-    a:hover {
-        color: #0056b3;
-        text-decoration: underline;
+.navbar-toggler {
+    border-color: #0056b3;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml, ..."); /* Bootstrap default SVG for the navbar-toggler, change color as needed */
+}
+
+.nav-item .dropdown-menu {
+    border-radius: 0;
+    border-color: #0056b3;
+}
+
+.dropdown-item {
+    color: #0056b3;
+}
+
+    .dropdown-item:hover {
+        background-color: #e9ecef;
     }
 
-/* Responsive design */
-@media screen and (max-width: 600px) {
-    .table, .table thead, .table tbody, .table th, .table td, .table tr {
-        display: block;
+/* Ensure the dropdown menu text is not too close to the edges */
+.dropdown-menu > li > a {
+    margin: 5px 15px;
+}
+
+/* Style for the active page */
+.navbar-nav .nav-link.active,
+.navbar-nav .show > .nav-link {
+    color: #ffffff !important;
+    background-color: #0056b3 !important;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 991.98px) {
+    .navbar-nav .dropdown-menu {
+        position: static;
+        float: none;
     }
+}
 
-        .table thead tr {
-            position: absolute;
-            top: -9999px;
-            left: -9999px;
-        }
-
-        .table tr {
-            border: 1px solid #ccc;
-        }
-
-        .table td {
-            border: none;
-            border-bottom: 1px solid #eee;
-            position: relative;
-            padding-left: 50%;
-            text-align: right;
-        }
-
-            .table td:before {
-                position: absolute;
-                top: 6px;
-                left: 6px;
-                width: 45%;
-                padding-right: 10px;
-                white-space: nowrap;
-                text-align: left;
-                font-weight: bold;
-            }
-
-            /* Label the data */
-            .table td:nth-of-type(1):before {
-                content: "Subject";
-            }
-
-            .table td:nth-of-type(2):before {
-                content: "Description";
-            }
-
-            .table td:nth-of-type(3):before {
-                content: "Date Created";
-            }
-
-            .table td:nth-of-type(4):before {
-                content: "Date Updated";
-            }
-
-            .table td:nth-of-type(5):before {
-                content: "Priority";
-            }
-
-            .table td:nth-of-type(6):before {
-                content: "Status";
-            }
-
-            .table td:nth-of-type(7):before {
-                content: "User";
-            }
-
-            .table td:nth-of-type(8):before {
-                content: "Category";
-            }
-
-            .table td:nth-of-type(9):before {
-                content: "Actions";
-            }
+/* Adjust the login partial to align with the nav items */
+#_LoginPartial {
+    display: flex;
+    align-items: center;
 }

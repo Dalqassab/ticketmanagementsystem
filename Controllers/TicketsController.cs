@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -20,7 +21,7 @@ namespace TicketManagementSystem.Controllers
             _context = context;
             _userManager = userManager;
         }
-
+     
         // GET: Tickets
         public async Task<IActionResult> Index()
         {
@@ -47,7 +48,7 @@ namespace TicketManagementSystem.Controllers
 
             return View(ticket);
         }
-
+        [Authorize]
         // GET: Tickets/Create
         public IActionResult Create()
         {
@@ -55,7 +56,7 @@ namespace TicketManagementSystem.Controllers
             ViewData["Id"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
-
+        [Authorize]
         // POST: Tickets/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -98,7 +99,7 @@ namespace TicketManagementSystem.Controllers
             ViewData["Id"] = new SelectList(_context.Users, "Id", "Id", ticket.Id);
             return View(ticket);
         }
-
+        [Authorize]
         // GET: Tickets/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -121,6 +122,7 @@ namespace TicketManagementSystem.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("TicketID,Subject,Description,DateCreated,DateUpdated,Priority,Status,Id,TicketCategoryID")] Ticket ticket)
         {
@@ -153,7 +155,7 @@ namespace TicketManagementSystem.Controllers
             ViewData["Id"] = new SelectList(_context.Users, "Id", "Id", ticket.Id);
             return View(ticket);
         }
-
+        [Authorize]
         // GET: Tickets/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -173,7 +175,7 @@ namespace TicketManagementSystem.Controllers
 
             return View(ticket);
         }
-
+        [Authorize]
         // POST: Tickets/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

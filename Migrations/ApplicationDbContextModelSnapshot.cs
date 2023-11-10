@@ -3,20 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TicketManagementSystem.Data;
 
 #nullable disable
 
-namespace TicketManagementSystem.Data.Migrations
+namespace TicketManagementSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231108195027_mig5")]
-    partial class mig5
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -171,7 +168,6 @@ namespace TicketManagementSystem.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -202,6 +198,10 @@ namespace TicketManagementSystem.Data.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<string>("Message")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -218,6 +218,9 @@ namespace TicketManagementSystem.Data.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -287,6 +290,58 @@ namespace TicketManagementSystem.Data.Migrations
                     b.ToTable("KnowledgeBaseArticle");
                 });
 
+            modelBuilder.Entity("TicketManagementSystem.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("receiverID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("senderId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("timestampsend")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("receiverID");
+
+                    b.HasIndex("senderId");
+
+                    b.ToTable("Message");
+                });
+
+            modelBuilder.Entity("TicketManagementSystem.Models.Technician", b =>
+                {
+                    b.Property<string>("TechnicianId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("areaofexpertise")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("yearsofexperience")
+                        .HasColumnType("int");
+
+                    b.HasKey("TechnicianId");
+
+                    b.ToTable("Technician");
+                });
+
             modelBuilder.Entity("TicketManagementSystem.Models.Ticket", b =>
                 {
                     b.Property<int>("TicketID")
@@ -321,12 +376,17 @@ namespace TicketManagementSystem.Data.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<string>("TechnicianId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("TicketCategoryID")
                         .HasColumnType("int");
 
                     b.HasKey("TicketID");
 
                     b.HasIndex("Id");
+
+                    b.HasIndex("TechnicianId");
 
                     b.HasIndex("TicketCategoryID");
 
@@ -395,13 +455,32 @@ namespace TicketManagementSystem.Data.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("TicketManagementSystem.Models.Message", b =>
+                {
+                    b.HasOne("TicketManagementSystem.Models.ApplicationUser", "receiver")
+                        .WithMany()
+                        .HasForeignKey("receiverID");
+
+                    b.HasOne("TicketManagementSystem.Models.ApplicationUser", "sender")
+                        .WithMany()
+                        .HasForeignKey("senderId");
+
+                    b.Navigation("receiver");
+
+                    b.Navigation("sender");
+                });
+
             modelBuilder.Entity("TicketManagementSystem.Models.Ticket", b =>
                 {
                     b.HasOne("TicketManagementSystem.Models.ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("SubmittedTickets")
                         .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("TicketManagementSystem.Models.Technician", null)
+                        .WithMany("AssignedTickets")
+                        .HasForeignKey("TechnicianId");
 
                     b.HasOne("TicketManagementSystem.Models.Category", "Category")
                         .WithMany("Tickets")
@@ -414,9 +493,19 @@ namespace TicketManagementSystem.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("TicketManagementSystem.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("SubmittedTickets");
+                });
+
             modelBuilder.Entity("TicketManagementSystem.Models.Category", b =>
                 {
                     b.Navigation("Tickets");
+                });
+
+            modelBuilder.Entity("TicketManagementSystem.Models.Technician", b =>
+                {
+                    b.Navigation("AssignedTickets");
                 });
 #pragma warning restore 612, 618
         }

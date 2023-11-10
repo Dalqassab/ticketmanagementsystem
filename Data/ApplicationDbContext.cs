@@ -13,6 +13,8 @@ namespace TicketManagementSystem.Data
         public DbSet<TicketManagementSystem.Models.Category> Category { get; set; } = default!;
         public DbSet<TicketManagementSystem.Models.Ticket> Ticket { get; set; } = default!;
         public DbSet<TicketManagementSystem.Models.KnowledgeBaseArticle> KnowledgeBaseArticle { get; set; } = default!;
+        public DbSet<TicketManagementSystem.Models.Technician> Technician { get; set; } = default!;
+        public DbSet<TicketManagementSystem.Models.Message> Message { get; set; } = default!;
         
     }
 }
