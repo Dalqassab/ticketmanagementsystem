@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\images\\logo.jpeg"
     },
     {
+      "Id": "C:\\Users\\me\\Documents\\Visual Studio 2022\\ticketmanagementsystem\\wwwroot\\images\\ticketlog.JPG",
+      "PackagePath": "staticwebassets\\images\\ticketlog.JPG"
+    },
+    {
       "Id": "C:\\Users\\me\\Documents\\Visual Studio 2022\\ticketmanagementsystem\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

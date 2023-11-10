@@ -1,1 +1,47 @@
-﻿
+﻿/* Navigation styles */
+.navbar {
+    margin-bottom: 1rem;
+    background-color: #ffffff;
+    color: black;
+    font-weight: bold;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: black;
+}
+
+
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml, ..."); /* Bootstrap default SVG for the navbar-toggler, change color as needed */
+}
+
+.nav-item .dropdown-menu {
+    border-radius: 0;
+    
+}
+
+
+
+
+/* Ensure the dropdown menu text is not too close to the edges */
+.dropdown-menu > li > a {
+    margin: 5px 15px;
+    color: black;
+}
+
+
+/* Adjustments for smaller screens */
+@media (max-width: 991.98px) {
+    .navbar-nav .dropdown-menu {
+        position: static;
+        float: none;
+    }
+}
+
+/* Adjust the login partial to align with the nav items */
+#_LoginPartial {
+    display: flex;
+    align-items: center;
+}

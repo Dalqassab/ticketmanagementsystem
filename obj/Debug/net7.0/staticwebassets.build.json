@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "5TdifXSOS8hAMYBdw+dNRRAOLaR1fN18XTQABg4yp5E=",
+  "Hash": "MvoNOZanMkK6mg1cb94WE/eAnrSneGHgvmiifyO5C44=",
   "Source": "TicketManagementSystem",
   "BasePath": "_content/TicketManagementSystem",
   "Mode": "Default",
@@ -1120,6 +1120,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\logo.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\me\\Documents\\Visual Studio 2022\\ticketmanagementsystem\\wwwroot\\images\\ticketlog.JPG",
+      "SourceId": "TicketManagementSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\me\\Documents\\Visual Studio 2022\\ticketmanagementsystem\\wwwroot\\",
+      "BasePath": "_content/TicketManagementSystem",
+      "RelativePath": "images/ticketlog.JPG",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\ticketlog.JPG"
     },
     {
       "Identity": "C:\\Users\\me\\Documents\\Visual Studio 2022\\ticketmanagementsystem\\wwwroot\\js\\site.js",
