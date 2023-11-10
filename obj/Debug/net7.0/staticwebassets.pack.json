@@ -13,12 +13,28 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\me\\Documents\\Visual Studio 2022\\ticketmanagementsystem\\wwwroot\\images\\dashboard.jpg",
+      "PackagePath": "staticwebassets\\images\\dashboard.jpg"
+    },
+    {
       "Id": "C:\\Users\\me\\Documents\\Visual Studio 2022\\ticketmanagementsystem\\wwwroot\\images\\logo.jpeg",
       "PackagePath": "staticwebassets\\images\\logo.jpeg"
     },
     {
+      "Id": "C:\\Users\\me\\Documents\\Visual Studio 2022\\ticketmanagementsystem\\wwwroot\\images\\ticket-tracking-system.png",
+      "PackagePath": "staticwebassets\\images\\ticket-tracking-system.png"
+    },
+    {
       "Id": "C:\\Users\\me\\Documents\\Visual Studio 2022\\ticketmanagementsystem\\wwwroot\\images\\ticketlog.JPG",
       "PackagePath": "staticwebassets\\images\\ticketlog.JPG"
+    },
+    {
+      "Id": "C:\\Users\\me\\Documents\\Visual Studio 2022\\ticketmanagementsystem\\wwwroot\\images\\ticketlogg.jpg",
+      "PackagePath": "staticwebassets\\images\\ticketlogg.jpg"
+    },
+    {
+      "Id": "C:\\Users\\me\\Documents\\Visual Studio 2022\\ticketmanagementsystem\\wwwroot\\images\\tips-tricks.jpg",
+      "PackagePath": "staticwebassets\\images\\tips-tricks.jpg"
     },
     {
       "Id": "C:\\Users\\me\\Documents\\Visual Studio 2022\\ticketmanagementsystem\\wwwroot\\js\\site.js",
