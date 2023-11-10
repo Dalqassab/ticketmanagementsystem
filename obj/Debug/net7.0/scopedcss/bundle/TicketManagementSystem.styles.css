@@ -1,0 +1,47 @@
+/* _content/TicketManagementSystem/Views/Shared/_Layout.cshtml.rz.scp.css */
+/* Navigation styles */
+.navbar[b-oe5eeamzxi] {
+    margin-bottom: 1rem;   
+    color: black;
+    font-weight: bold;
+}
+
+.navbar-brand[b-oe5eeamzxi] {
+    font-weight: bold;
+    color: black;
+}
+
+
+
+.navbar-toggler-icon[b-oe5eeamzxi] {
+    background-image: url("data:image/svg+xml, ..."); /* Bootstrap default SVG for the navbar-toggler, change color as needed */
+}
+
+.nav-item .dropdown-menu[b-oe5eeamzxi] {
+    border-radius: 0;
+    
+}
+
+
+
+
+/* Ensure the dropdown menu text is not too close to the edges */
+.dropdown-menu > li > a[b-oe5eeamzxi] {
+    margin: 5px 15px;
+    color: black;
+}
+
+
+/* Adjustments for smaller screens */
+@media (max-width: 991.98px) {
+    .navbar-nav .dropdown-menu[b-oe5eeamzxi] {
+        position: static;
+        float: none;
+    }
+}
+
+/* Adjust the login partial to align with the nav items */
+#_LoginPartial[b-oe5eeamzxi] {
+    display: flex;
+    align-items: center;
+}

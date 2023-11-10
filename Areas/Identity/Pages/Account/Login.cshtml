@@ -5,17 +5,15 @@
     ViewData["Title"] = "Log in";
 }
 
-<h1>@ViewData["Title"]</h1>
-div class="container mt-5">
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card shadow">
-            <div class="card-header text-white" style="background-color:#ffdab9">
-                <h3 class="card-title">Write Tips and Trick</h3>
-            </div>
-            <div class="card-body">
-                <div class="col-md-4">
-                    <section>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header text-white" style="background-color:#ffdab9">
+                    <h3 class="card-title">Sign in</h3>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-8">
                         <form id="account" method="post">
                             <h2>Use a local account to log in.</h2>
                             <hr />
@@ -51,14 +49,13 @@ div class="container mt-5">
                                 </p>
                             </div>
                         </form>
-                    </section>
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
-
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+
