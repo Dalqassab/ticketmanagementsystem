@@ -12,8 +12,8 @@ using TicketManagementSystem.Data;
 namespace TicketManagementSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231110000642_df")]
-    partial class df
+    [Migration("20231116171048_mig")]
+    partial class mig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

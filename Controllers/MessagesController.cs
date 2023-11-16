@@ -49,7 +49,7 @@ namespace TicketManagementSystem.Controllers
         // GET: Messages/Create
         public IActionResult Create()
         {
-            ViewData["receiverID"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["receiverID"] = new SelectList(_context.Users, "Username", "Username");
             ViewData["senderId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
@@ -61,13 +61,14 @@ namespace TicketManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Subject,Body,timestampsend,senderId,receiverID")] Message message)
         {
+           
             if (ModelState.IsValid)
             {
                 _context.Add(message);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["receiverID"] = new SelectList(_context.Users, "Id", "Id", message.receiverID);
+            ViewData["Username"] = new SelectList(_context.Users, "Username", "Username", message.receiverID);
             ViewData["senderId"] = new SelectList(_context.Users, "Id", "Id", message.senderId);
             return View(message);
         }

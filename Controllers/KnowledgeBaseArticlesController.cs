@@ -23,6 +23,7 @@ namespace TicketManagementSystem.Controllers
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.KnowledgeBaseArticle.Include(k => k.Category);
+
             return View(await applicationDbContext.ToListAsync());
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +15,12 @@ namespace TicketManagementSystem.Controllers
     public class TechniciansController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public TechniciansController(ApplicationDbContext context)
+        public TechniciansController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Technicians
@@ -49,6 +52,7 @@ namespace TicketManagementSystem.Controllers
         // GET: Technicians/Create
         public IActionResult Create()
         {
+          
             return View();
         }
         [Authorize]
@@ -59,10 +63,24 @@ namespace TicketManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("TechnicianId,areaofexpertise,yearsofexperience")] Technician technician)
         {
-            if (ModelState.IsValid)
+            if (User.Identity.IsAuthenticated)
+            {
+                string userId = _userManager.GetUserId(User); ; 
+                technician.TechnicianId = userId;
+                // Use the userId variable for further processing
+            }
+            else
+            {
+                // Handle the case when no user is logged in
+            }
+
+
+            if (!ModelState.IsValid)
             {
                 _context.Add(technician);
                 await _context.SaveChangesAsync();
+                var user = await _userManager.FindByIdAsync(technician.TechnicianId);
+                await _userManager.AddToRoleAsync(user, "Technician");
                 return RedirectToAction(nameof(Index));
             }
             return View(technician);

@@ -8,7 +8,7 @@
 <h1>Available Technicians</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary mb-3"  asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -32,9 +32,9 @@
                 @Html.DisplayFor(modelItem => item.yearsofexperience)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.TechnicianId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.TechnicianId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.TechnicianId">Delete</a>
+                    <a class="btn btn-primary mb-3" asp-action="Edit" asp-route-id="@item.TechnicianId">Edit</a> 
+                    <a class="btn btn-success mb-3" asp-action="Details" asp-route-id="@item.TechnicianId">Details</a> 
+                    <a class="btn btn-danger mb-3" asp-action="Delete" asp-route-id="@item.TechnicianId">Delete</a>
             </td>
         </tr>
 }
