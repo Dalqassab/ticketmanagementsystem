@@ -13,7 +13,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary">
-            <img src="~/images/logo.jpeg" alt="logo" width="50" height="50"></a>
+            <img src="~/images/logo.jpeg" alt="logo" width="50" height="50">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -22,9 +22,19 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
-                    
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="KnowledgeBaseArticles" asp-action="Index">Knowledge Base</a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="ticketDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            KnowledgeBase Articles
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="kbDropdown">
+                            <li> <a class="dropdown-item" asp-area="" asp-controller="KnowledgeBaseArticles" asp-action="Index">Knowledge Base Articles</a></li>
+                            @if (User.IsInRole("Technician") | User.IsInRole("Admin"))
+                            {
+                                <li><a class="dropdown-item" asp-area="" asp-controller="KnowledgeBaseArticles" asp-action="Create">Create Knowledge Base Article</a></li>
+                            }
+
+                        </ul>
                     </li>
 
                     <li class="nav-item dropdown">
@@ -32,16 +42,44 @@
                             Tickets
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="ticketDropdown">
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Tickets" asp-action="Create">Create Ticket</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Tickets" asp-action="Index">My Tickets</a></li>
+                            @if (User.IsInRole("Member"))
+                            {
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Tickets" asp-action="Create">Create Ticket</a></li>
+
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Tickets" asp-action="Index">My Tickets</a></li>
+                            }
+                            @if (User.IsInRole("Admin") | User.IsInRole("Technician"))
+                            {
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Tickets" asp-action="Index">Available Tickets</a></li>
+
+                            }
                             <li>
                                 <a class="dropdown-item" asp-area="" asp-controller="Categories" asp-action="Index">Ticket Categories</a>
                             </li>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Categories" asp-action="Create">Create Categories</a>
+                                </li>
+                            }
+
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Technicians" asp-action="Index">Technicians</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="tecjDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Technician
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="technicianDropdown">
+                            <li>
+                                <a class ="dropdown-item" asp-area="" asp-controller="Technicians" asp-action="Index">Available Technicians</a>
+                                </li>
+                            @if (User.IsInRole("Member") )
+                            {
+                                <li><a class="nav-link" asp-area="" asp-controller="Technicians" asp-action="Create">Technicians</a></li>
+                            }
+                        </ul>
                     </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="infoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Info

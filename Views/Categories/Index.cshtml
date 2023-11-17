@@ -5,16 +5,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
 
+ @if (User.IsInRole("Admin"))
+  {
 <p>
-    <a class="btn btn-primary mb-3" asp-action="Create">Create New</a>
+    <a class="btn btn-primary mb-3" asp-action="Create">Create New Category</a>
 </p>
+  }
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CategoryName)
+               Ticket Categories
             </th>
             <th></th>
         </tr>
@@ -25,11 +27,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CategoryName)
             </td>
+                @if (User.IsInRole("Admin") )               
+                {
             <td>
                     <a class="btn btn-primary mb-3" asp-action="Edit" asp-route-id="@item.CategoryID">Edit</a> 
                     <a class="btn btn-success mb-3" asp-action="Details" asp-route-id="@item.CategoryID">Details</a>
                     <a class="btn btn-danger mb-3" asp-action="Delete" asp-route-id="@item.CategoryID">Delete</a>
             </td>
+                }
         </tr>
 }
     </tbody>

@@ -12,6 +12,7 @@ using TicketManagementSystem.Models;
 
 namespace TicketManagementSystem.Controllers
 {
+    [Authorize]
     public class TicketsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -100,7 +101,7 @@ namespace TicketManagementSystem.Controllers
             return View(ticket);
         }
         [Authorize]
-        // GET: Tickets/Edit/5
+        // GET: Tickets/Edit/<int>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Ticket == null)
@@ -126,6 +127,7 @@ namespace TicketManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("TicketID,Subject,Description,DateCreated,DateUpdated,Priority,Status,Id,TicketCategoryID")] Ticket ticket)
         {
+            ticket.DateUpdated = DateTime.Now;
             if (id != ticket.TicketID)
             {
                 return NotFound();

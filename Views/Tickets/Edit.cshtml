@@ -24,27 +24,36 @@
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="display:none">
                 <label asp-for="DateCreated" class="control-label"></label>
                 <input asp-for="DateCreated" class="form-control" />
                 <span asp-validation-for="DateCreated" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="display:none">
                 <label asp-for="DateUpdated" class="control-label"></label>
                 <input asp-for="DateUpdated" class="form-control" />
                 <span asp-validation-for="DateUpdated" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" >
                 <label asp-for="Priority" class="control-label"></label>
-                <select asp-for="Priority" class="form-control"></select>
+                <select asp-for="Priority" class="form-control">
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
                 <span asp-validation-for="Priority" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
-                <select asp-for="Status" class="form-control"></select>
+                <select asp-for="Status" class="form-control">
+                    <option value="Open">Open</option>
+                    <option value="InProgress">InProgress</option>
+                    <option value="Resolved">Resolved</option>
+                    <option value="Closed">Closed</option>
+                </select>
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="display:none">
                 <label asp-for="Id" class="control-label"></label>
                 <select asp-for="Id" class="form-control" asp-items="ViewBag.Id"></select>
                 <span asp-validation-for="Id" class="text-danger"></span>

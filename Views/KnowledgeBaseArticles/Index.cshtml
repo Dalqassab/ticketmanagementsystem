@@ -5,17 +5,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Knowledge Base</h1>
+<h1>Knowledge Base Articles</h1>
+
 <nav class="navbar navbar-light bg-light">
     <form class="form-inline">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
 </nav>
-
-<p>
-    <a class="btn btn-primary mb-3"  asp-action="Create">Create New</a>
-</p>
+@if (User.IsInRole("Admin") | User.IsInRole("Technician"))
+{
+    <p>
+        <a class="btn btn-primary mb-3" asp-action="Create">Create New</a>
+    </p>
+}
 <table class="table">
     <thead>
         <tr>
@@ -32,23 +35,31 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Content)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.CategoryName)
-            </td>
-            <td>
-                    <a class="btn btn-primary mb-3" asp-action="Edit" asp-route-id="@item.ArticleID">Edit</a> 
-                    <a class="btn btn-success mb-3" asp-action="Details" asp-route-id="@item.ArticleID">Details</a> 
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ArticleID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                </td>
+
+                <td>
+                    @if (User.IsInRole("Admin") | User.IsInRole("Technician"))
+                    {
+                        <a class="btn btn-primary mb-3" asp-action="Edit" asp-route-id="@item.ArticleID">Edit</a>
+                        <a class="btn btn-info mb-3" asp-action="Details" asp-route-id="@item.ArticleID">Details</a>
+                    }@if (User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-danger mb-3" asp-action="Delete" asp-route-id="@item.ArticleID">Delete</a>
+                    }
+                </td>
+
+            </tr>
+        }
     </tbody>
 </table>

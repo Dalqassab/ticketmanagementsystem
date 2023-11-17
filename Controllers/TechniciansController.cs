@@ -12,6 +12,7 @@ using TicketManagementSystem.Models;
 
 namespace TicketManagementSystem.Controllers
 {
+    [Authorize]
     public class TechniciansController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -23,13 +24,48 @@ namespace TicketManagementSystem.Controllers
             _userManager = userManager;
         }
 
-        // GET: Technicians
+        // GET: Technicians        
         public async Task<IActionResult> Index()
         {
-              return _context.Technician != null ? 
-                          View(await _context.Technician.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Technician'  is null.");
+            // Retrieve all technicians from the database
+            var technicians = await _context.Technician.ToListAsync();
+
+            // Create a dictionary to map technician IDs to usernames
+            var technicianIdToUsername = new Dictionary<string, string>();
+            foreach (var technician in technicians)
+            {
+                // Get the username for the current technician
+                var username = await _userManager.FindByIdAsync(technician.TechnicianId);
+
+                // Add the technician ID and username to the dictionary
+                technicianIdToUsername[technician.TechnicianId] = username.UserName;
+            }
+
+            // Replace technician IDs with usernames in the technicians list
+            foreach (var technician in technicians)
+            {
+                technician.TechnicianId = technicianIdToUsername[technician.TechnicianId];
+            }
+
+            // Return the modified technicians list to the view
+            return View(technicians);
         }
+
+        // GET: Technicians/GetName/5
+        public async Task<string> GetUsernameById(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                return user.UserName;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
 
         // GET: Technicians/Details/5
         public async Task<IActionResult> Details(string id)
@@ -63,27 +99,29 @@ namespace TicketManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("TechnicianId,areaofexpertise,yearsofexperience")] Technician technician)
         {
-            if (User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated & !User.IsInRole("Technician"))
             {
                 string userId = _userManager.GetUserId(User); ; 
                 technician.TechnicianId = userId;
-                // Use the userId variable for further processing
+
+                if (!ModelState.IsValid)
+                {
+                    _context.Add(technician);
+                    await _context.SaveChangesAsync();
+                    var user = await _userManager.FindByIdAsync(technician.TechnicianId);
+                    await _userManager.AddToRoleAsync(user, "Technician");
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(technician);
             }
             else
             {
                 // Handle the case when no user is logged in
+                return View();
             }
 
 
-            if (!ModelState.IsValid)
-            {
-                _context.Add(technician);
-                await _context.SaveChangesAsync();
-                var user = await _userManager.FindByIdAsync(technician.TechnicianId);
-                await _userManager.AddToRoleAsync(user, "Technician");
-                return RedirectToAction(nameof(Index));
-            }
-            return View(technician);
+            
         }
 
         // GET: Technicians/Edit/5

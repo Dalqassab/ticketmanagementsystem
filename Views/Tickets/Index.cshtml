@@ -15,11 +15,18 @@
         color: #333;
     }
 </style>
-<h1>My Tickets</h1>
 
-<p>
-    <a class="btn btn-primary mb-3" asp-action="Create">Create New</a>
-</p>
+@if (User.IsInRole("Member")){
+    <h1>My Tickets</h1>                          
+    <p>
+        <a class="btn btn-primary mb-3" asp-action="Create">Create New</a>
+    </p>
+    }
+@if (User.IsInRole("Technician") | User.IsInRole("Admin"))
+    {
+      <h2>Available Tickets</h2>  
+    
+    }
 <table class="table">
     <thead>
         <tr>
@@ -72,11 +79,19 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Category.CategoryName)
             </td>
-            <td>
-                    <a class="btn btn-primary mb-3" asp-action="Edit" asp-route-id="@item.TicketID">Edit</a> 
-                    <a class="btn btn-success mb-3" asp-action="Details" asp-route-id="@item.TicketID">Details</a> 
-                    <a class="btn btn-danger mb-3"  asp-action="Delete" asp-route-id="@item.TicketID">Delete</a>
-            </td>
+                
+                <td>
+                    @if (User.IsInRole("Member"))
+                    {
+                        <a class="btn btn-primary mb-3" asp-action="Edit" asp-route-id="@item.TicketID">Edit</a>
+                    }
+                    <a class="btn btn-success mb-3" asp-action="Details" asp-route-id="@item.TicketID">Details</a>
+                    @if (User.IsInRole("Member"))
+                    {
+                        <a class="btn btn-danger mb-3"  asp-action="Delete" asp-route-id="@item.TicketID">Delete</a>
+                    }
+                </td>
+                
         </tr>
 }
     </tbody>
