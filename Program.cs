@@ -74,6 +74,7 @@ async Task InitializeRolesAndAdminUser(IServiceProvider serviceProvider)
         string password = "Test123!,";
         string fname = "admin";
 
+
         if (await userManager.FindByEmailAsync(email) == null)
         {
             var user = new ApplicationUser { UserName = email, FirstName=fname, LastName=fname,Email = email, EmailConfirmed = true };

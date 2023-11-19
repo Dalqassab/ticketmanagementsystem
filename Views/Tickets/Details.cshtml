@@ -97,9 +97,16 @@
                 </dl>
             </div>
             <div>
-                <a asp-action="Edit" asp-route-id="@Model?.TicketID">Edit</a> |
-                <a asp-action="Index">Back to List</a>
-                
+                @if (User.IsInRole("Member"))
+                {
+                    <a class="btn btn-primary mb-3"  asp-action="Edit" asp-route-id="@Model?.TicketID">Edit</a>
+                }
+                @if (User.IsInRole("Technician"))
+                {
+                    <a class="btn btn-primary mb-3" asp-action="UpdateStatus" asp-route-id="@Model?.TicketID">Update Status</a>
+                }
+                <a class="btn btn-info mb-3" asp-action="Index">Back to List</a>
+
             </div>
         </div>
     </div>

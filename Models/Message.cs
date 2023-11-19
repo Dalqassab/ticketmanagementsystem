@@ -17,11 +17,11 @@ namespace TicketManagementSystem.Models
         [Required]
         public DateTime timestampsend { get; set; } = DateTime.UtcNow;
 
-        [ForeignKey("Application")]
+        [ForeignKey("ApplicationUser")]
         public string? senderId { get; set; }
         public ApplicationUser sender { get; set; }
 
-        [ForeignKey("Technician")]
+        [ForeignKey("ApplicationUser")]
         public string? receiverID { get; set; }
         public ApplicationUser receiver { get; set; }
 

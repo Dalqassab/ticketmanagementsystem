@@ -1,0 +1,51 @@
+﻿@model TicketManagementSystem.Models.Ticket
+
+@{
+    ViewData["Title"] = "UpdateStatus";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Create Ticket</h3>
+<hr />
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header text-white" style="background-color:#ffdab9">
+                    <h3 class="card-title">Create Ticket</h3>
+                </div>
+                <div class="card-body">
+
+                    <form method="post" action="/Tickets/UpdateStatus/1/Closed">
+                        <input type="hidden" name="id" value="1">
+                        <select name="status">
+                            <option value="Open">Open</option>
+
+
+                            <option value="InProgress">In Progress</option>
+
+
+                            <option value="Resolved">Resolved</option>
+
+
+                            <option value="Closed">Closed</option>
+
+
+                        </select>
+                        <button type="submit">Update Status</button>
+                    </form>                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
