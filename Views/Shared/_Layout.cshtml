@@ -27,6 +27,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="ticketDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             KnowledgeBase Articles
                         </a>
+
                         <ul class="dropdown-menu" aria-labelledby="kbDropdown">
                             <li> <a class="dropdown-item" asp-area="" asp-controller="KnowledgeBaseArticles" asp-action="Index">Knowledge Base Articles</a></li>
                             @if (User.IsInRole("Technician") | User.IsInRole("Admin"))
@@ -36,7 +37,8 @@
 
                         </ul>
                     </li>
-
+                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Messages" asp-action="Index">My Messages</a></li>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="ticketDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Tickets
@@ -71,9 +73,9 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="technicianDropdown">
                             <li>
-                                <a class ="dropdown-item" asp-area="" asp-controller="Technicians" asp-action="Index">Available Technicians</a>
-                                </li>
-                            @if (User.IsInRole("Member") )
+                                <a class="dropdown-item" asp-area="" asp-controller="Technicians" asp-action="Index">Available Technicians</a>
+                            </li>
+                            @if (User.IsInRole("Member"))
                             {
                                 <li><a class="nav-link" asp-area="" asp-controller="Technicians" asp-action="Create">Technicians</a></li>
                             }

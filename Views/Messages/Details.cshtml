@@ -24,26 +24,22 @@
             @Html.DisplayFor(model => model.Body)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.timestampsend)
+            @Html.DisplayNameFor(model => model.Timestampsend)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.timestampsend)
+            @Html.DisplayFor(model => model.Timestampsend)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.sender)
+            @Html.DisplayNameFor(model => model.Sender)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.sender.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.receiver)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.receiver.Id)
-        </dd>
+            @Html.DisplayFor(model => model.Sender.UserName)
+        </dd>        
+        
     </dl>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Reply" asp-route-id="@Model?.Id">Reply</a> |
     <a asp-action="Index">Back to List</a>
 </div>

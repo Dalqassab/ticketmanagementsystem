@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -36,7 +37,8 @@ namespace TicketManagementSystem.Controllers
             {
                 tickets = await _context.Ticket.Include(t => t.Category).Include(t => t.User).Include(t => t.Facilitator).DefaultIfEmpty().Where(t => t.Id == userId).ToListAsync();
             }
-            else{
+            else
+            {
                 tickets = await _context.Ticket.Include(t => t.Category).Include(t => t.User).Include(t => t.Facilitator).DefaultIfEmpty().ToListAsync();
             }
 
@@ -79,11 +81,13 @@ namespace TicketManagementSystem.Controllers
             ViewData["Id"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
-        [Authorize]
+
         // POST: Tickets/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
+        [Authorize(Roles = "Member")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("TicketID,Subject,Description,DateCreated,DateUpdated,Priority,Status,Id,TicketCategoryID")] Ticket ticket)
         {
@@ -122,7 +126,7 @@ namespace TicketManagementSystem.Controllers
             ViewData["Id"] = new SelectList(_context.Users, "Id", "Id", ticket.Id);
             return View(ticket);
         }
-        [Authorize]
+        [Authorize(Roles = "Member")]
         // GET: Tickets/Edit/<int>
         public async Task<IActionResult> Edit(int? id)
         {
@@ -224,18 +228,28 @@ namespace TicketManagementSystem.Controllers
         }
 
         [HttpGet]
-        [Route("Tickets/Takeit/{id}")]
         public async Task<IActionResult> TakeIt(int? id)
         {
-            var ticket = await _context.Ticket.FindAsync(id);
+            if (id == null || _context.Ticket == null)
+            {
+                return NotFound();
+            }
+
+            var ticket = await _context.Ticket.FirstOrDefaultAsync(m => m.TicketID == id);
+            if (ticket == null)
+            {
+                return NotFound();
+            }
+
             return View(ticket);
+
         }
 
 
 
         [HttpPost]
-        [Route("Tickets/TakeIt/{id}")]
-        public async Task<IActionResult> TakeIt(int id)
+        //[Route("Tickets/TakeIt/{id}")]
+        public async Task<IActionResult> TakeIt(int id, bool takeit)
         {
             // Retrieve the ticket data based on the provided ID
             var ticket = await _context.Ticket.FindAsync(id);
@@ -245,16 +259,24 @@ namespace TicketManagementSystem.Controllers
                 return NotFound();
             }
 
-            // Update the ticket's status with the provided value
 
-            ApplicationUser user = (ApplicationUser)await _userManager.FindByIdAsync(ticket.Id);
+            // Get the ID of the currently logged-in user
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+            {
+                return Unauthorized(); // or some other appropriate response
+            }
+            if (takeit)
+            {
+                // Update the ticket's TechnicianId with the current user's ID
+                ticket.TechnicianId = userId;
 
-            ticket.TechnicianId = user.Id;
+                // Save the updated ticket data to the database
+                _context.Update(ticket);
+                await _context.SaveChangesAsync();
 
+            }
 
-            // Save the updated ticket data to the database
-            _context.Update(ticket);
-            await _context.SaveChangesAsync();
 
             // Return a successful response
             return RedirectToAction(nameof(Index)); ;
@@ -283,6 +305,8 @@ namespace TicketManagementSystem.Controllers
 
             return View(ticket);
         }
+
+
         [Authorize]
         // POST: Tickets/Delete/5
         [HttpPost, ActionName("Delete")]

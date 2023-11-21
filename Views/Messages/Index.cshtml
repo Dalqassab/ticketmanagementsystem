@@ -5,27 +5,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>My Messages</h1>
+<h1>Index</h1>
 
 <p>
-    <a class="btn btn-primary mb-3"  asp-action="Create">Create New</a>
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Subject)
+            </th>            
+            <th>
+                @Html.DisplayNameFor(model => model.Timestampsend)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Body)
+                @Html.DisplayNameFor(model => model.Sender)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.timestampsend)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.sender)
-            </th>
-          
+           
             <th></th>
         </tr>
     </thead>
@@ -34,20 +31,17 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Subject)
+            </td>           
+            <td>
+                @Html.DisplayFor(modelItem => item.Timestampsend)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Body)
-            </td>
+                @Html.DisplayFor(modelItem => item.Sender.UserName)
+            </td>           
             <td>
-                @Html.DisplayFor(modelItem => item.timestampsend)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.sender.Id)
-            </td>
-                        <td>
-                    <a class="btn btn-primary mb-3" asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
-                    <a class="btn btn-success mb-3" asp-action="Details" asp-route-id="@item.Id">Details</a> 
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

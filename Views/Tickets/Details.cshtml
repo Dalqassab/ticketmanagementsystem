@@ -9,12 +9,12 @@
     .ticket-view {
         background: linear-gradient(to bottom right,#ffdab9,#ffffff,#f5f5f5);
         border-radius: 8px;
-        padding: 20px;
-        margin: 20px 0;
+        padding: 5px;
+        margin: 5px 0;
     }
 
     .ticket-actions a {
-        margin-right: 15px;
+        margin-right: 5px;
         color: #007bff;
     }
 
@@ -29,25 +29,14 @@
         border-bottom: 1px solid #e9ecef;
     }
 
-    .ticket-dl-horizontal dt {
-        float: left;
-        width: 150px;
-        overflow: hidden;
-        clear: left;
-        text-align: right;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    .ticket-dl-horizontal dd {
-        margin-left: 160px;
-    }
+    
+   
 </style>
 
 <h1>Details</h1>
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="ticket-view">
                 <h4 class="ticket-headerTicket"></h4>
                 <hr />
@@ -93,6 +82,12 @@
                     </dt>
                     <dd class="col-sm-10">
                         @Html.DisplayFor(model => model.Category.CategoryName)
+                    </dd>
+                    <dt dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.User)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.User.UserName)
                     </dd>
                 </dl>
             </div>

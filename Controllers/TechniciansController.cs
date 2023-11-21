@@ -109,6 +109,7 @@ namespace TicketManagementSystem.Controllers
                     _context.Add(technician);
                     await _context.SaveChangesAsync();
                     var user = await _userManager.FindByIdAsync(technician.TechnicianId);
+                    await _userManager.RemoveFromRoleAsync(user, "Member");
                     await _userManager.AddToRoleAsync(user, "Technician");
                     return RedirectToAction(nameof(Index));
                 }

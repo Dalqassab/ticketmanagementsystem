@@ -299,24 +299,37 @@ namespace TicketManagementSystem.Migrations
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
 
+                    b.Property<int?>("ParentMessageId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReceiverID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SenderId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Subject")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("receiverID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("TheTicketTicketID")
+                        .HasColumnType("int");
 
-                    b.Property<string>("senderId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("TicketId")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("timestampsend")
+                    b.Property<DateTime>("Timestampsend")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("receiverID");
+                    b.HasIndex("ParentMessageId");
 
-                    b.HasIndex("senderId");
+                    b.HasIndex("ReceiverID");
+
+                    b.HasIndex("SenderId");
+
+                    b.HasIndex("TheTicketTicketID");
 
                     b.ToTable("Message");
                 });
@@ -454,17 +467,29 @@ namespace TicketManagementSystem.Migrations
 
             modelBuilder.Entity("TicketManagementSystem.Models.Message", b =>
                 {
-                    b.HasOne("TicketManagementSystem.Models.ApplicationUser", "receiver")
+                    b.HasOne("TicketManagementSystem.Models.Message", "ParentMessage")
+                        .WithMany("Replies")
+                        .HasForeignKey("ParentMessageId");
+
+                    b.HasOne("TicketManagementSystem.Models.ApplicationUser", "Receiver")
                         .WithMany()
-                        .HasForeignKey("receiverID");
+                        .HasForeignKey("ReceiverID");
 
-                    b.HasOne("TicketManagementSystem.Models.ApplicationUser", "sender")
+                    b.HasOne("TicketManagementSystem.Models.ApplicationUser", "Sender")
                         .WithMany()
-                        .HasForeignKey("senderId");
+                        .HasForeignKey("SenderId");
 
-                    b.Navigation("receiver");
+                    b.HasOne("TicketManagementSystem.Models.Ticket", "TheTicket")
+                        .WithMany()
+                        .HasForeignKey("TheTicketTicketID");
 
-                    b.Navigation("sender");
+                    b.Navigation("ParentMessage");
+
+                    b.Navigation("Receiver");
+
+                    b.Navigation("Sender");
+
+                    b.Navigation("TheTicket");
                 });
 
             modelBuilder.Entity("TicketManagementSystem.Models.Ticket", b =>
@@ -500,6 +525,11 @@ namespace TicketManagementSystem.Migrations
             modelBuilder.Entity("TicketManagementSystem.Models.Category", b =>
                 {
                     b.Navigation("Tickets");
+                });
+
+            modelBuilder.Entity("TicketManagementSystem.Models.Message", b =>
+                {
+                    b.Navigation("Replies");
                 });
 
             modelBuilder.Entity("TicketManagementSystem.Models.Technician", b =>

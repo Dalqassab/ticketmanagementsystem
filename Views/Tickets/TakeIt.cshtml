@@ -15,14 +15,13 @@
                     <h3 class="card-title">Create Ticket</h3>
                 </div>
                 <div class="card-body">
-
-                   <!-- <form method="post" action="/Tickets/TakeIt/1">-->
-                    <form sp-action="TaketIt">
-                        <input type="hidden" name="id" value="1">
-                        <input type="checkbox" id="takeit" name="takeit" value="False">
+                    <form method="post" asp-controller="Tickets" asp-action="TakeIt" asp-route-id="@Model.TicketID">
+                        <input type="hidden" name="id" value="@Model.TicketID">
+                        <input type="checkbox" id="takeit" name="takeit" value="True">
                         <label for="takeit"> Take it</label><br>
-                        <button type="submit">Update Status</button>
+                        <button type="submit">Handle the Task</button>
                     </form>
+
                 </div>
             </div>
         </div>
