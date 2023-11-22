@@ -1,13 +1,13 @@
 ﻿/* Navigation styles */
 .navbar {
     margin-bottom: 1rem;   
-    color: black;
+    color: white;
     font-weight: bold;
 }
 
 .navbar-brand {
     font-weight: bold;
-    color: black;
+    color: white;
 }
 
 
@@ -27,7 +27,7 @@
 /* Ensure the dropdown menu text is not too close to the edges */
 .dropdown-menu > li > a {
     margin: 5px 15px;
-    color: black;
+    color: white; 
 }
 
 

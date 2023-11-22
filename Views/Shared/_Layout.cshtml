@@ -12,7 +12,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary">
+        <nav class="navbar navbar-expand-lg navbar navbar-dark" style="color:white">
             <img src="~/images/logo.jpeg" alt="logo" width="50" height="50">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -20,11 +20,11 @@
             <div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <a style="color:white" class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="ticketDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="ticketDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             KnowledgeBase Articles
                         </a>
 
@@ -37,10 +37,10 @@
 
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Messages" asp-action="Index">My Messages</a></li>
+                    <li class="nav-item"><a class="nav-link" style="color:white" asp-area="" asp-controller="Messages" asp-action="Index">My Messages</a></li>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="ticketDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="ticketDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Tickets
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="ticketDropdown">
@@ -68,7 +68,7 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="tecjDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="tecjDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Technician
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="technicianDropdown">
@@ -77,13 +77,15 @@
                             </li>
                             @if (User.IsInRole("Member"))
                             {
-                                <li><a class="nav-link" asp-area="" asp-controller="Technicians" asp-action="Create">Technicians</a></li>
+                                <li>
+                                    <a class="drodown-item" asp-area="" asp-controller="Technicians" asp-action="Create">Register as Technician</a>
+                                </li>
                             }
                         </ul>
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="infoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" style="color:white" href="#" id="infoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Info
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="infoDropdown">

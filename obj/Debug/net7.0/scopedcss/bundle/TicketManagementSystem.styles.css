@@ -2,13 +2,13 @@
 /* Navigation styles */
 .navbar[b-oe5eeamzxi] {
     margin-bottom: 1rem;   
-    color: black;
+    color: white;
     font-weight: bold;
 }
 
 .navbar-brand[b-oe5eeamzxi] {
     font-weight: bold;
-    color: black;
+    color: white;
 }
 
 
@@ -28,7 +28,7 @@
 /* Ensure the dropdown menu text is not too close to the edges */
 .dropdown-menu > li > a[b-oe5eeamzxi] {
     margin: 5px 15px;
-    color: black;
+    color: white; 
 }
 
 
