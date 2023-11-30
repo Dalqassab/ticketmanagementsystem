@@ -61,58 +61,60 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Subject)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateCreated)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateUpdated)
-                </td>
-                <td>
-                    @if ((item.TechnicianId) != null)
-                    {
-                        <text>Assigned</text>
-                    }
-                    else
-                    {
-                        <text>Not Assigned</text>
-                    }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Priority)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
+            if (item != null)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Subject)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateCreated)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateUpdated)
+                    </td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.TechnicianId))
+                        {
+                            <text>Assigned</text>
+                        }
+                        else
+                        {
+                            <text>Not Assigned</text>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Priority)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                    </td>
+
+                    <td>
+                        @if (User.IsInRole("Member"))
+                        {
+                            <a class="btn btn-primary mb-3" asp-action="Edit" asp-route-id="@item.TicketID">Edit</a>
+                        }
+                        <a class="btn btn-info mb-3" asp-action="Details" asp-route-id="@item.TicketID">Details</a>
+                        @if (User.IsInRole("Technician") && item.TechnicianId == null)
+                        {
+                            <a class="btn btn-info mb-3" asp-action="TakeIt" asp-route-id="@item.TicketID">Take it </a>
+                        }
+                        @if (User.IsInRole("Member"))
+                        {
+                            <a class="btn btn-danger mb-3" asp-action="Delete" asp-route-id="@item.TicketID">Delete</a>
+                        }
+
                 </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
-                </td>
-
-                <td>
-                    @if (User.IsInRole("Member"))
-                    {
-                        <a class="btn btn-primary mb-3" asp-action="Edit" asp-route-id="@item.TicketID">Edit</a>
-                    }
-                    <a class="btn btn-info mb-3" asp-action="Details" asp-route-id="@item.TicketID">Details</a>
-                    @if (User.IsInRole("Technician") && item.TechnicianId == null)
-                    {
-                        <a class="btn btn-info mb-3" asp-action="TakeIt" asp-route-id="@item.TicketID">Take it </a>
-                    }
-                    @if (User.IsInRole("Member"))
-                    {
-                        <a class="btn btn-danger mb-3" asp-action="Delete" asp-route-id="@item.TicketID">Delete</a>
-                    }
-
-                </td>
-
-            </tr>
+            </tr>}
         }
     </tbody>
 </table>
