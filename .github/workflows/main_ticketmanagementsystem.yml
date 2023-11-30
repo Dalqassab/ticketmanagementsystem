@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'ticketmanagementsystem'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_805DB954B7204F1EB431F054675C990C }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E858918D22AA4CC8AD4097263236BE27 }}
           package: .
