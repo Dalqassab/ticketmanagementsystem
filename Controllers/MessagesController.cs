@@ -29,6 +29,7 @@ namespace TicketManagementSystem.Controllers
                                                .Include(m => m.Sender)
                                                .Where(m => m.SenderId == currentUserId || m.ReceiverID == currentUserId);
 
+
             return View(await applicationDbContext.ToListAsync());
           
         }

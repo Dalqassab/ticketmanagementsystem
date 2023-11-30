@@ -55,43 +55,57 @@ app.MapRazorPages();
 // Move user and role management code here, after app.Run()
 async Task InitializeRolesAndAdminUser(IServiceProvider serviceProvider)
 {
-    using (var scope = serviceProvider.CreateScope())
+    try
     {
-        var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-        var roles = new[] { "Admin", "Technician", "Member" };
-        foreach (var role in roles)
+        using (var scope = serviceProvider.CreateScope())
         {
-            if (!await roleManager.RoleExistsAsync(role))
-                await roleManager.CreateAsync(new IdentityRole(role));
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var roles = new[] { "Admin", "Technician", "Member" };
+            foreach (var role in roles)
+            {
+                if (!await roleManager.RoleExistsAsync(role))
+                {
+                    var createRoleResult = await roleManager.CreateAsync(new IdentityRole(role));
+                    if (!createRoleResult.Succeeded)
+                    {
+                        throw new InvalidOperationException($"Error creating role '{role}': {createRoleResult.Errors.FirstOrDefault()?.Description}");
+                    }
+                }
+            }
+        }
+
+        using (var scope = serviceProvider.CreateScope())
+        {
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+            string email = "admin@admin.com";
+            string password = "Test123!,";
+            string fname = "admin";
+
+            if (await userManager.FindByEmailAsync(email) == null)
+            {
+                var user = new ApplicationUser { UserName = email, FirstName = fname, LastName = fname, Email = email, EmailConfirmed = true };
+
+                var createResult = await userManager.CreateAsync(user, password);
+                if (createResult.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user, "Admin");
+                }
+                else
+                {
+                    throw new InvalidOperationException($"Admin user could not be created: {createResult.Errors.FirstOrDefault()?.Description}");
+                }
+            }
         }
     }
-
-    using (var scope = serviceProvider.CreateScope())
+    catch (Exception ex)
     {
-        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-
-        string email = "admin@admin.com";
-        string password = "Test123!,";
-        string fname = "admin";
-
-
-        if (await userManager.FindByEmailAsync(email) == null)
-        {
-            var user = new ApplicationUser { UserName = email, FirstName=fname, LastName=fname,Email = email, EmailConfirmed = true };
-
-            var createResult = await userManager.CreateAsync(user, password);
-            if (createResult.Succeeded)
-            {
-                await userManager.AddToRoleAsync(user, "Admin");
-            }
-            else
-            {
-                // Handle the case when user creation fails
-                throw new InvalidOperationException($"Admin user could not be created: {createResult.Errors.FirstOrDefault()?.Description}");
-            }
-        }
+        // Log the exception or handle it as needed
+        // Example: Logger.LogError("An error occurred during initialization: {ex.Message}", ex);
+        throw; // Optionally rethrow the exception if you want to propagate it further
     }
 }
+
 
 // Call the initialization method here. Make sure it's after app.Run() and you await it if your Main method is async
 await InitializeRolesAndAdminUser(app.Services);

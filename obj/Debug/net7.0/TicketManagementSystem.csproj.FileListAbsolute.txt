@@ -1,7 +1,5 @@
-C:\Users\me\Documents\Visual Studio 2022\ticketmanagementsystem\bin\Debug\net7.0\appsettings.Development.json
 C:\Users\me\Documents\Visual Studio 2022\ticketmanagementsystem\bin\Debug\net7.0\TicketManagementSystem.staticwebassets.runtime.json
 C:\Users\me\Documents\Visual Studio 2022\ticketmanagementsystem\bin\Debug\net7.0\TicketManagementSystem.exe
-C:\Users\me\Documents\Visual Studio 2022\ticketmanagementsystem\bin\Debug\net7.0\appsettings.json
 C:\Users\me\Documents\Visual Studio 2022\ticketmanagementsystem\bin\Debug\net7.0\TicketManagementSystem.deps.json
 C:\Users\me\Documents\Visual Studio 2022\ticketmanagementsystem\bin\Debug\net7.0\TicketManagementSystem.runtimeconfig.json
 C:\Users\me\Documents\Visual Studio 2022\ticketmanagementsystem\bin\Debug\net7.0\TicketManagementSystem.dll
@@ -289,3 +287,4 @@ C:\Users\me\Documents\Visual Studio 2022\ticketmanagementsystem\obj\Debug\net7.0
 C:\Users\me\Documents\Visual Studio 2022\ticketmanagementsystem\obj\Debug\net7.0\TicketManagementSystem.pdb
 C:\Users\me\Documents\Visual Studio 2022\ticketmanagementsystem\obj\Debug\net7.0\TicketManagementSystem.genruntimeconfig.cache
 C:\Users\me\Documents\Visual Studio 2022\ticketmanagementsystem\obj\Debug\net7.0\ref\TicketManagementSystem.dll
+C:\Users\me\Documents\Visual Studio 2022\ticketmanagementsystem\bin\Debug\net7.0\appsettings.json
